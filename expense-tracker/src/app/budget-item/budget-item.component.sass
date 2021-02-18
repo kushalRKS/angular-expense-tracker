@@ -1,0 +1,41 @@
+.item
+  display: flex
+  font-size: 14px
+  justify-content: space-between
+  padding: 15px 9px
+  border-radius: 5px
+  color: #fff
+  position: relative
+
+  .delete-icon
+    display: inline-flex
+    position: absolute
+    background: #26282B
+    width: 30px
+    height: 30px
+    align-items: center
+    justify-content: center
+    border-radius: 50%
+    right: -16px
+    top: -11px
+    transform: scale(0)
+    transition: all 0.2s
+    transform-origin: center
+    visibility: hidden
+    svg
+      width: 15px
+      path
+        fill: white
+  &:hover
+    .delete-icon
+      transform: none
+      visibility: visible
+  &.list_expense
+    background: #ff555d
+    box-shadow: -9px 8px 15px 1px #bebebe, 8px -5px 17px 0px #ffffff
+  &.list_income
+    background: #68e1b6
+    box-shadow: -9px 8px 15px 1px #bebebe, 8px -5px 17px 0px #ffffff
+
+
+

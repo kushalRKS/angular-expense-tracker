@@ -1,0 +1,25 @@
+<app-header></app-header>
+
+<div class="balance">
+  {{ totalBudget }}
+</div>
+
+<div class="view">
+  <ngx-charts-pie-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="financeSummary"
+  >
+  </ngx-charts-pie-chart>
+</div>
+
+<app-budget-input-form
+  (onFormSubmit)="onFormSubmit($event)"
+></app-budget-input-form>
+
+<app-budget-list
+  [items]="budgetItems"
+  (deleteItem)="deleteItem($event)"
+></app-budget-list>
+
+<!-- this..emit(item); -->
