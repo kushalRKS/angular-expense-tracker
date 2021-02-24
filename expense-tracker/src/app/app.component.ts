@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { BudgetItem } from './models/budgetItem.model';
 import { financeSummary } from './models/chartData';
+import {saveToMemory} from './utils/util'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +12,7 @@ export class AppComponent {
   title = 'expense-tracker';
 
   budgetItems: Array<BudgetItem> = new Array<BudgetItem>();
+
   totalBudget: number = 0;
 
   single: any[];
@@ -36,7 +39,13 @@ export class AppComponent {
     },
   ];
 
-  constructor() {}
+  constructor() {
+      const savedBudgetData = localStorage.getItem('budgetLists');
+        if(!savedBudgetData) return
+      this.budgetItems = JSON.parse(savedBudgetData);
+      this.getFinanceSummary(this.budgetItems);
+
+  }
 
   getFinanceSummary(items: Array<BudgetItem>) {
     let earning = items
@@ -71,6 +80,7 @@ export class AppComponent {
     this.budgetItems.push(newItem);
     this.totalBudget += newItem.price;
     this.getFinanceSummary(this.budgetItems);
+    saveToMemory(this.budgetItems);
   }
 
   deleteItem(item: BudgetItem) {
@@ -78,5 +88,6 @@ export class AppComponent {
     this.budgetItems.splice(index, 1);
     this.totalBudget -= item.price;
     this.getFinanceSummary(this.budgetItems);
+    saveToMemory(this.budgetItems);
   }
 }

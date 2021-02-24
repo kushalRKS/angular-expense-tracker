@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup } from '@angular/forms';
 import { BudgetItem } from '../models/budgetItem.model';
 @Component({
   selector: 'app-budget-input-form',
@@ -13,10 +13,16 @@ export class BudgetInputFormComponent implements OnInit {
   onFormSubmit: EventEmitter<BudgetItem> = new EventEmitter<BudgetItem>();
 
   formData: BudgetItem;
+  
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   onSubmit(form: NgForm) {
+
+    if(form.value.description.startsWith(' ')) return
+
     this.onFormSubmit.emit(form.value);
     form.reset();
   }
